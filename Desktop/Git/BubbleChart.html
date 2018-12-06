@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="bubblechart.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="#" />
+    <title>World GDP figures using D3</title>
+    <style>
+
+        .axis .domain {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="row">
+            <div class="column3" style="border-bottom:1px dotted #d0cecf; height:70px">
+                <div class="title">World GDP (2007 - 2017) </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            
+        </div>
+        <div class="row">
+            <div class="column2" style="width:70%;">
+                <div class="row">
+                    <div class="column3" style="padding:10px 0px 0px 0px;">
+                        <div class="filters" style="width:28%;text-align:left; padding-top:2px;">Select filters to trace a country or click on a bubble to trace</div>
+                        <div class="filters" style="width:30%;">
+                            <select id="region-dropdown" class="select" style="width:100%">
+                                <option id="--Select Region--">--Select Region--</option>
+                            </select>
+                        </div>
+                        <div class="filters" style="width:27%;">
+                            <select id="country-dropdown" class="select" style="width:100%">
+                                <option id="--Select Country--">--Select Country--</option>
+                            </select>
+                        </div>
+                        <div class="filters" style="width:15%;text-align:right;">
+                            <button id="reset-button">Reset Trace</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column3" style="height:80px; padding-top:0px;">
+                        <div id="slider" style="float:left">
+                        </div>
+                        <div style="float:left; padding-top:20px; text-align:right"><button id="play-button">Play</button></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column3" style="padding:0px 0px;">
+                        <div id="bubblechart" class="column">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column1" style="width:25%;padding-left:10px;">
+                <div><svg id="svg_countries" width=350 height=30></svg></div>
+                <div><svg id="svg_compare" width=250 height=400></svg></div>
+            </div>
+        </div>
+        <div id="checkboxes">
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="bubblechart.js"></script>
+</body>
+</html>
