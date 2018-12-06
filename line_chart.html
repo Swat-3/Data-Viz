@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8">
+<head>
+<title>"Checking line graphs"</title>
+<style> /* set the CSS */
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+</style>
+</head>
+<body>
+	<script src='https://d3js.org/d3.v4.min.js' language="javascript" type="text/javascript"></script>
+	<p> Information Visualisation Check</p>
+<script>
+
+	var axis_gap_bar=5;
+	var bar_pad=3;
+	//var value_scalar=0.0000004;
+	var dataset5;
+	var axis_gap_text = 10;
+	 console.log("here");
+
+	var margin = {top: 10, right: 10, bottom: 25, left: 70};
+
+		var outer_width = 1000;
+			var outer_height = 300;
+			var svg_width = outer_width - margin.left - margin.right;
+			var svg_height = outer_height - margin.top - margin.bottom;
+		var parseTime=d3.timeParse("%d/%m/%Y");
+
+		var x= d3.scaleTime().range([0,svg_width]);
+		var y= d3.scaleLinear().range([svg_height,0]);
+
+		var valueline=d3.line()
+					   .x(function(d){return x(d.date);})
+					   .y(function(d) {return y(d.values);});
+					   
+
+
+
+	svg=d3.select("body")
+			.append("svg")
+			.style("background", "aliceblue")
+			.attr("width", svg_width + margin.left + margin.right)
+			.attr("height", svg_height + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");  
+
+	d3.csv("sampledata.csv", function(err,data){
+		if (err) throw err;
+		data.forEach(function(d){
+			d.date= new Date(parseTime(d.date));
+			d.values= +d.values;
+			console.log(d.values);
+
+		});
+
+
+	console.log(valueline(data));
+
+	x.domain(d3.extent(data, function(d){return d.date;}));
+	y.domain([0,d3.max(data,function(d){return d.values;})]);
+
+	svg.append("path")
+		.data([data])
+		.attr("class","line")
+		.attr("d",valueline);
+	svg.append("g")
+		.attr("transform","translate(0,"+svg_height+")")
+		.call(d3.axisBottom(x));
+	svg.append("g")
+		.call(d3.axisLeft(y));
+
+	});
+
+</script>
+</body>
+
+
+
